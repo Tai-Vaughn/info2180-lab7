@@ -25,7 +25,7 @@
 
 <?php if($context === 'country'):?>
 
-<table>
+<table class="steelBlueCols">
     <div>
 <thead>
    <th>Country Name</th>
@@ -50,24 +50,21 @@
 
 <?php else : ?>
 
-<table>
+<table class="steelBlueCols">
     <div>
 <thead>
-   <th>Country Name</th>
    <th>City Name</th>
    <th>District</th>
    <th>Population</th>
-   
+   <th>Country Of Origin</th>
 </thead>
 <tbody>
     <?php foreach ($results as $row): ?>
  <tr>
-     <td> <?=$row['cn']?><td>
      <td> <?=$row['name']?></td>
      <td> <?=$row['district']?></td>
      <td> <?=$row['population']?></td>
-    
-     
+     <td> <?=$row['cn']?><td>
  </tr>   
   <?php endforeach; ?>  
     
