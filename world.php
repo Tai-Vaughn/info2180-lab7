@@ -14,10 +14,10 @@
   $stmt->execute();
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   } else {
-    $stmt = $conn->prepare("SELECT cities.name, cities.district, cities.population FROM countries 
-                            JOIN cities on countries.code = cities.country_code Where countries.name LIKE :country");
-    $stmt->bindParam(':country' , $country , PDO::PARAM_STR);
-    $stmt->execute();
+    $stmt = $conn->query("SELECT countries.name as cn, cities.name, cities.district, cities.population FROM countries 
+                            JOIN cities on countries.code = cities.country_code Where countries.name LIKE '%$country%'");
+    // $stmt->bindParam(':country' , $country , PDO::PARAM_STR);
+    // $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
   //+echo json_encode($results);
@@ -53,6 +53,7 @@
 <table>
     <div>
 <thead>
+   <th>Country Name</th>
    <th>City Name</th>
    <th>District</th>
    <th>Population</th>
@@ -61,7 +62,8 @@
 <tbody>
     <?php foreach ($results as $row): ?>
  <tr>
-     <td> <?= $row['name']?></td>
+     <td> <?=$row['cn']?><td>
+     <td> <?=$row['name']?></td>
      <td> <?=$row['district']?></td>
      <td> <?=$row['population']?></td>
     
